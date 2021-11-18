@@ -16,8 +16,7 @@
 <server description="Sample Servlet server">
     <featureManager>
 		<feature>servlet-4.0</feature>
-		<feature>jpa-2.2</feature>
-		<!--  <feature>javaee-8.0</feature>  -->		
+		<feature>jpa-2.2</feature>	
 	</featureManager>    
 
 	<webApplication id="openliberty-jta-example" location="openliberty-jta-example.war" name="openliberty-jta-example"/>
