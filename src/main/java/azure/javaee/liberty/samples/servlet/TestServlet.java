@@ -49,6 +49,7 @@ public class TestServlet extends HttpServlet {
  			
  			
  			// Test #3: use com.ibm.ws.Transaction.TransactionManagerFactory
+			// https://github.com/OpenLiberty/open-liberty/issues/1487#issuecomment-470761493
 			TransactionManager transactionManager2 = TransactionManagerFactory.getTransactionManager(); 			
 			out.println("Access transaction manager using TransactionManagerFactory    " + transactionManager2);
 		} catch (NamingException e) {
