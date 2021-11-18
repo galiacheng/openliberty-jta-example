@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>azure-liberty-jta-example</artifactId>
+	<groupId>liberty-jta</groupId>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+
+	<properties>
+		<liberty.var.default.http.port>9080</liberty.var.default.http.port>
+		<liberty.var.default.https.port>9443</liberty.var.default.https.port>
+		<maven.compiler.source>1.8</maven.compiler.source>
+     	<maven.compiler.target>1.8</maven.compiler.target>
+     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.liberty-maven-plugin>3.3-M3</version.liberty-maven-plugin>
+        <version.jakarta.jakartaee-web-api>8.0.0</version.jakarta.jakartaee-web-api>
+        <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
+        <version.microprofile>3.2</version.microprofile>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-web-api</artifactId>
+			<version>${version.jakarta.jakartaee-web-api}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.microprofile</groupId>
+			<artifactId>microprofile</artifactId>
+			<version>${version.microprofile}</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.maven-war-plugin}</version>
+			</plugin>
+			<plugin>
+				<groupId>io.openliberty.tools</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<version>${version.liberty-maven-plugin}</version>
+			</plugin>
+
+		</plugins>
+
+	</build>
+</project>
