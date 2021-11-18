@@ -1,4 +1,4 @@
-# openliberty-jta-example
+This example is to get `TransactionManager` using `com.ibm.ws.Transaction.TransactionManagerFactory`.
 
 # tools
  - maven 3.6.3
