@@ -39,7 +39,7 @@ public class TestServlet extends HttpServlet {
 			// OpenLiberty: java:comp/TransactionManager is not a spec-defined JNDI name			
 //			 TransactionManager transactionManager0 = (TransactionManager) new InitialContext().lookup("java:comp/TransactionManager");
 			
-			// Test #2: User org.springframework.transaction.jta.JtaTransactionManager 
+			// Test #2: use org.springframework.transaction.jta.JtaTransactionManager 
 			// Un-workable UserTransaction -> JtaTransactionManager -> TransactionManager
 			// https://docs.spring.io/spring-framework/docs/1.1.0/javadoc-api/org/springframework/transaction/jta/JtaTransactionManager.html
 			UserTransaction userTransaction  = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");			
@@ -48,7 +48,7 @@ public class TestServlet extends HttpServlet {
  			out.println("Access transaction manager using JtaTransactionManager    " + transactionManager1);
  			
  			
- 			// Test #3: Use com.ibm.ws.Transaction.TransactionManagerFactory
+ 			// Test #3: use com.ibm.ws.Transaction.TransactionManagerFactory
 			TransactionManager transactionManager2 = TransactionManagerFactory.getTransactionManager();
  			
 			out.println("Access transaction manager using TransactionManagerFactory    " + transactionManager2);
