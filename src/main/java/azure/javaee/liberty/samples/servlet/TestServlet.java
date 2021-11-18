@@ -49,8 +49,7 @@ public class TestServlet extends HttpServlet {
  			
  			
  			// Test #3: use com.ibm.ws.Transaction.TransactionManagerFactory
-			TransactionManager transactionManager2 = TransactionManagerFactory.getTransactionManager();
- 			
+			TransactionManager transactionManager2 = TransactionManagerFactory.getTransactionManager(); 			
 			out.println("Access transaction manager using TransactionManagerFactory    " + transactionManager2);
 		} catch (NamingException e) {
 			out.println("Can not access transaction manager");
