@@ -14,6 +14,8 @@ import javax.transaction.UserTransaction;
 
 import org.springframework.transaction.jta.JtaTransactionManager;
 
+import com.ibm.tx.jta.TransactionManagerFactory;
+
 @WebServlet(urlPatterns="/app")
 public class TestServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -25,6 +27,7 @@ public class TestServlet extends HttpServlet {
 		ServletOutputStream out = response.getOutputStream();
 		
 		try {
+			// Test #1: lookup java:comp/TransactionManager
 			// java:comp/TransactionManager         javax.naming.NameNotFoundException:
 			// java:/TransactionManager             javax.naming.NameNotFoundException:
 			// java:appserver/TransactionManager    javax.naming.NameNotFoundException:
@@ -34,16 +37,21 @@ public class TestServlet extends HttpServlet {
 			
 			// ISSUE: https://github.com/OpenLiberty/open-liberty/issues/1487
 			// OpenLiberty: java:comp/TransactionManager is not a spec-defined JNDI name			
-			// TransactionManager transactionManager = (TransactionManager) new InitialContext().lookup("java:comp/TransactionManager");
+//			 TransactionManager transactionManager0 = (TransactionManager) new InitialContext().lookup("java:comp/TransactionManager");
 			
-			
-			// Workable UserTransaction -> JtaTransactionManager -> TransactionManager
-			UserTransaction userTransaction  = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
-			// User org.springframework.transaction.jta.JtaTransactionManager to get the javax.transaction.TransactionManager
+			// Test #2: User org.springframework.transaction.jta.JtaTransactionManager 
+			// Un-workable UserTransaction -> JtaTransactionManager -> TransactionManager
 			// https://docs.spring.io/spring-framework/docs/1.1.0/javadoc-api/org/springframework/transaction/jta/JtaTransactionManager.html
+			UserTransaction userTransaction  = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");			
  			JtaTransactionManager jtaTransManager = new JtaTransactionManager(userTransaction);
- 			TransactionManager transactionManager = jtaTransManager.getTransactionManager();
-			out.println("Access transaction manager");
+ 			TransactionManager transactionManager1 = jtaTransManager.getTransactionManager();
+ 			out.println("Access transaction manager using JtaTransactionManager    " + transactionManager1);
+ 			
+ 			
+ 			// Test #3: Use com.ibm.ws.Transaction.TransactionManagerFactory
+			TransactionManager transactionManager2 = TransactionManagerFactory.getTransactionManager();
+ 			
+			out.println("Access transaction manager using TransactionManagerFactory    " + transactionManager2);
 		} catch (NamingException e) {
 			out.println("Can not access transaction manager");
 			e.printStackTrace();
